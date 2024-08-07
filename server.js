@@ -47,7 +47,7 @@ const htmlContent = (port) => `
     </head>
     <body>
       <div class="container">
-        <h1>Hello World from port ${port}</h1>
+        <h1>Hello World</h1>
         <button onclick="window.location.href='https://github.com/TopSkibidi/APITESTAPP'">Go to GitHub</button>
       </div>
     </body>
