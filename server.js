@@ -5,12 +5,7 @@ const app2 = express();
 const port1 = 3000;
 const port2 = 4000;
 
-const getIpAddress = (req) => {
-  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  return ip.includes('::ffff:') ? ip.split('::ffff:')[1] : ip;
-};
-
-const htmlContent = (port, ip) => `
+const htmlContent = (port) => `
   <html>
     <head>
       <style>
@@ -28,9 +23,6 @@ const htmlContent = (port, ip) => `
         }
         h1 {
           color: #333;
-        }
-        p {
-          color: #666;
         }
         button {
           background-color: #4CAF50; /* Green */
@@ -56,7 +48,6 @@ const htmlContent = (port, ip) => `
     <body>
       <div class="container">
         <h1>Hello World from port ${port}</h1>
-        <p>Your IP Address: ${ip}</p>
         <button onclick="window.location.href='https://github.com/TopSkibidi/APITESTAPP'">Go to GitHub</button>
       </div>
     </body>
@@ -64,13 +55,11 @@ const htmlContent = (port, ip) => `
 `;
 
 app1.get('/', (req, res) => {
-  const ip = getIpAddress(req);
-  res.send(htmlContent(port1, ip));
+  res.send(htmlContent(port1));
 });
 
 app2.get('/', (req, res) => {
-  const ip = getIpAddress(req);
-  res.send(htmlContent(port2, ip));
+  res.send(htmlContent(port2));
 });
 
 app1.listen(port1, () => {
